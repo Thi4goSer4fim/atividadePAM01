@@ -18,7 +18,7 @@ export default function App() {
 
   // Função para calcular a Força
 
-  const calculateMechanicalWork = () => {
+  const calculateForce = () => {
     const n1 = parseFloat(num1);
 
     const n2 = parseFloat(num2);
@@ -29,16 +29,16 @@ export default function App() {
       return;
     }
 
-    const work = n1 * n2;
+    const force = n1 * n2;
 
-    setTotal(work.toFixed(2));
+    setTotal(force.toFixed(2));
   };
 
   return (
     <View style={styles.container}>
-      <Image source={require("./assets/work.png")} style={styles.logo} />
+      <Image source={require("./assets/forca.webp")} style={styles.logo} />
 
-      <Text style={styles.label}>Força (N):</Text>
+      <Text style={styles.label}>Massa (kg):</Text>
 
       <TextInput
         style={styles.input}
@@ -47,7 +47,7 @@ export default function App() {
         onChangeText={setNum1}
       />
 
-      <Text style={styles.label}>Distância (m):</Text>
+      <Text style={styles.label}>Aceleração (m/s²):</Text>
 
       <TextInput
         style={styles.input}
@@ -56,11 +56,11 @@ export default function App() {
         onChangeText={setNum2}
       />
 
-      <TouchableOpacity onPress={calculateMechanicalWork} style={styles.button}>
-        <Text style={styles.buttonText}>Calcular Trabalho Mecânico</Text>
+      <TouchableOpacity onPress={calculateForce} style={styles.button}>
+        <Text style={styles.buttonText}>Calcular Força</Text>
       </TouchableOpacity>
 
-      {total !== null && <Text style={styles.result}>Trabalho: {total} J</Text>}
+      {total !== null && <Text style={styles.result}>Força: {total} N</Text>}
     </View>
   );
 }
