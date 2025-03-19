@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import {
   View,
   Text,
@@ -11,33 +10,30 @@ import {
 
 export default function App() {
   const [total, setTotal] = useState("");
-
   const [num1, setNum1] = useState("");
 
-  const [num2, setNum2] = useState("");
+  // Função para calcular a Força
+  const calculateTemperature = (type) => {
+    const n1 = parseFloat(num1);
 
-  // Função para calcular a Energia
-
-  const calculateKineticEnergy = (mass, velocity) => {
-    const n1 = parseFloat(mass);
-
-    const n2 = parseFloat(velocity);
-
-    if (isNaN(n1) || isNaN(n1)) {
-      alert("Entrada inválida! Insira valores numéricos");
-
+    if (isNaN(n1)) {
+      alert("Entrada inválida! Insira um valor numérico");
       return;
     }
 
-    return ((n1 * (n2 * n2)) / 2).toFixed(2);
+    if (type == "celsius") {
+      const total = (n1 - 32) / 1.8;
+      setTotal(total.toFixed(2) + "°C");
+    } else if (type == "fahrenheit") {
+      const total = n1 * 1.8 + 32;
+      setTotal(total.toFixed(2) + "°F");
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Image source={require("./assets/ec.jpg")} style={styles.logo} />
-
-      <Text style={styles.label}>Massa (kg):</Text>
-
+      <Image source={require("./assets/fire.png")} style={styles.logo} />
+      <Text style={styles.label}>Temperatura:</Text>
       <TextInput
         style={styles.input}
         keyboardType="numeric"
@@ -45,24 +41,22 @@ export default function App() {
         onChangeText={setNum1}
       />
 
-      <Text style={styles.label}>Velocidade: (s):</Text>
-
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        value={num2}
-        onChangeText={setNum2}
-      />
-
       <TouchableOpacity
-        onPress={() => setTotal(calculateKineticEnergy(num1, num2))}
+        onPress={() => calculateTemperature("celsius")}
         style={styles.button}
       >
-        <Text style={styles.buttonText}>Calcular Força Cinética</Text>
+        <Text style={styles.buttonText}>Calcular fahrenheit para celsius</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        onPress={() => calculateTemperature("fahrenheit")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Calcular celsius para fahrenheit</Text>
       </TouchableOpacity>
 
       {total !== null && (
-        <Text style={styles.result}>Energia Cinética: {total} J</Text>
+        <Text style={styles.result}>Temperatura: {total} </Text>
       )}
     </View>
   );
@@ -71,77 +65,49 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     justifyContent: "center",
-
     alignItems: "center",
-
     padding: 20,
-
     backgroundColor: "#141414",
-
     gap: 10,
   },
-
   label: {
     fontSize: 16,
-
     marginBottom: 5,
-
     color: "#f0f0f0",
   },
-
   input: {
     width: "30%",
-
     height: 40,
-
     borderWidth: 1,
-
     borderColor: "gray",
-
     marginBottom: 10,
-
     paddingLeft: 10,
-
     borderRadius: 5,
-
     color: "#f0f0f0",
   },
-
   result: {
     fontSize: 18,
-
     marginTop: 10,
-
     fontWeight: "bold",
-
     color: "#f0f0f0",
   },
 
   button: {
     backgroundColor: "#5c57c0",
-
     padding: 10,
-
     width: "30%",
-
     borderRadius: 4,
   },
 
   buttonText: {
     color: "#f0f0f0",
-
     textAlign: "center",
-
     fontWeight: "bold",
   },
-
   logo: {
     width: 100,
-
     height: 100,
-
     resizeMode: "contain",
   },
 });
