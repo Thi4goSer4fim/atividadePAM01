@@ -34,6 +34,7 @@ export default function App() {
 <Text style={styles.buttonText}>-</Text>
 </TouchableOpacity>
 
+
       </View>
 
       <StatusBar style="auto" />
